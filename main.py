@@ -9,7 +9,7 @@ class Welcome:
 
     def known_info(self):
         """Prints current user's information"""
-        
+
         print(f"Username: {self.username}")
         print(f"Hunger Status: {self.hunger}")
 
@@ -17,15 +17,14 @@ class Welcome:
     def is_hungry(self):
         """Is the user hungry?"""
 
-        hunger_status = input("Are you hungry? Y/N ")
-
         # Alter hunger class attribute to whatever user inputs
         while True:
+            hunger_status = input("Are you hungry? Y/N ")
 
-            if hunger_status == "Y":
+            if hunger_status.upper() == "Y":
                 self.hunger = True
                 break
-            elif hunger_status == "N":
+            elif hunger_status.upper() == "N":
                 self.hunger = False
                 break
             else:
