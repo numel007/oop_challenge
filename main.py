@@ -42,11 +42,22 @@ class Welcome:
         print(f"User's name changed to: {self.username}")
 
 
-# Inherits username, displays recipe options
+# Inherits from Welcome class, provides method to display savory recipe options
 class Savory(Welcome):
+
+    # Instantiate object with inherited username and empty chosen_item
     def __init__(self, username, hunger = True, chosen_item = ""):
-        super().__init__(username, hunger)
+        super().__init__(username)
         self.chosen_item = ""
+
+
+    def change_name(self):
+        """Change user's name"""
+
+        new_name = input("What would you like your new name to be? ")
+        self.username = new_name
+        print(f"User's name changed to: {self.username}")
+
 
     def known_info(self):
         """Prints user's information"""
@@ -54,8 +65,9 @@ class Savory(Welcome):
         print(f"Username: {self.username}")
         print(f"{self.username} wants savory")
 
+
     def display_recipes(self):
-        """Display savory recipes"""
+        """Display recipes"""
 
         while True:
             recipe_name = input("What tickles your fancy today? Some good ol' meat between buns or an Italian pie? ")
@@ -75,7 +87,51 @@ class Savory(Welcome):
         return self.chosen_item
 
 
+# Inherits from Welcome class, provides method to display sweet recipe options
+class Sweet(Welcome):
+
+    # Instantiate object with inherited username and empty chosen_item
+    def __init__(self, username, hunger = True, chosen_item = ""):
+        super().__init__(username)
+
+
+    def change_name(self):
+        """Change user's name"""
+
+        new_name = input("What would you like your new name to be? ")
+        self.username = new_name
+        print(f"User's name changed to: {self.username}")
+
+
+    def known_info(self):
+        """Prints user's information"""
+
+        print(f"Username: {self.username}")
+        print(f"{self.username} wants sweet")
+
+
+    def display_recipes(self):
+        """Display recipes"""
+
+        while True:
+            recipe_name = input("A bit of a sweet tooth eh? I've got flan and bread pudding on the menu. What'll it be? ")
+
+            if recipe_name.lower() == "flan":
+                print("I see you want flan.")
+                self.chosen_item = "flan"
+                break
+            elif recipe_name.lower() == "bread pudding":
+                print("I see you want bread pudding.")
+                self.chosen_item = "bread pudding"
+                break
+            else:
+                print("I have no idea what that is my dude. Try again.")
+                continue
+
+        return self.chosen_item
+
+
 #------------------- Object Creation -------------------
-test_user = Savory("testuser")
-test_user.known_info()
+
+test_user = Sweet("testuser")
 test_user.display_recipes()
