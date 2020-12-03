@@ -66,8 +66,8 @@ class Savory(Welcome):
         print(f"{self.username} wants savory")
 
 
-    def display_recipes(self):
-        """Display recipes"""
+    def display_categories(self):
+        """Display category options"""
 
         while True:
             recipe_name = input("What tickles your fancy today? Some good ol' meat between buns or an Italian pie? ")
@@ -83,8 +83,6 @@ class Savory(Welcome):
             else:
                 print("I have no idea what that is my dude. Try again.")
                 continue
-
-        return self.chosen_item
 
 
 # Inherits from Welcome class, provides method to display sweet recipe options
@@ -132,6 +130,7 @@ class Sweet(Welcome):
 
 
 class Burger(Savory):
+    """Requires username, initial total, ingredient list"""
     patty_cost = 1.49
     lettuce_cost = 0.05
     pickle_cost = 0.15
@@ -265,6 +264,7 @@ class Burger(Savory):
 
 
 class Pizza(Savory):
+    """Requires username, initial total, and starting item list"""
     slice_price = 5.99
     ten_in_price = 14.99
     the_jeremiah_special_price = 0.99
@@ -325,8 +325,11 @@ class Pizza(Savory):
 
     def pizza_creator(self):
         """Add user-picked pizzas to the cart"""
-
+        
+        # Create empty list to store graphics in
         graphics = []
+
+        # Pizza graphics
         slice_graphic = """
                                      ._
                                    ,(  `-.
@@ -434,6 +437,7 @@ class Pizza(Savory):
                                                         ▒▒▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒░░                                                      
                                                                 ░░░░▒▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒░░░░                                                                """
 
+        # Add pizzas to item_list and graphics to graphics list
         while True:
             pizza_size = (input(f"What size pizza are you feeling? \n 1. A slice  ${Pizza.slice_price}\n 2. 10in     ${Pizza.ten_in_price}\n 3. 40in     ${Pizza.the_jeremiah_special_price}\n 4. No more pizza please \n Your choice: ")).lower()
 
@@ -458,6 +462,14 @@ class Pizza(Savory):
                 print("Invalid choice. Try again. \n")
                 continue
         
+        if len(self.item_list) > 1:
+            print("\nHere's your pizzas!\n")
+        elif len(self.item_list) == 1:
+            print("\nHere's your pizza!\n")
+        else:
+            print("\nYou didn't order anything. How am I supposed to pay rent if you don't buy something?\n")
+
+        # Present the user's order
         for item in graphics:
             print(item)
 
@@ -465,4 +477,4 @@ class Pizza(Savory):
 #------------------- Object Creation -------------------
 
 test_user = Pizza("testuser", 10, ["test"])
-test_user.update_pizza_costs()
+test_user.pizza_creator()
