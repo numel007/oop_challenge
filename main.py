@@ -48,7 +48,6 @@ class Savory(Welcome):
     # Instantiate object with inherited username and empty chosen_item
     def __init__(self, username, hunger = True, chosen_item = ""):
         super().__init__(username)
-        self.chosen_item = ""
 
 
     def change_name(self):
@@ -137,10 +136,10 @@ class Burger(Savory):
     tomato_cost = 0.25
     cheese_cost = 0.75
 
-    def __init__(self, username, total, ingredients):
+    def __init__(self, username, total = 0, ingredients = []):
         super().__init__(username)
-        self.total = 0
-        self.ingredients = []
+        self.total = total
+        self.ingredients = ingredients
 
     def change_name(self):
         """Change user's name"""
@@ -269,10 +268,10 @@ class Pizza(Savory):
     ten_in_price = 14.99
     the_jeremiah_special_price = 0.99
 
-    def __init__(self, username, total, item_list):
+    def __init__(self, username, total = 0, item_list = []):
         super().__init__(username)
-        self.total = 0
-        self.item_list = []
+        self.total = total
+        self.item_list = item_list
 
 
     def change_name(self):
@@ -476,5 +475,5 @@ class Pizza(Savory):
 
 #------------------- Object Creation -------------------
 
-test_user = Pizza("testuser", 10, ["test"])
-test_user.pizza_creator()
+test_user = Burger("testuser")
+print(test_user.total)
