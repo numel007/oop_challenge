@@ -159,6 +159,7 @@ class Burger(Savory):
 
 
     def update_ingredients_costs(self):
+        """Update class ingredient prices"""
 
         old_patty_cost = Burger.patty_cost
         old_lettuce_cost = Burger.lettuce_cost
@@ -181,6 +182,7 @@ class Burger(Savory):
         print(f"Cheese: ${old_cheese_cost} --> ${Burger.cheese_cost}")
 
     def update_total(self):
+        """Totals the user's items"""
 
         for ingredient in self.ingredients:
             if ingredient == "patty":
@@ -263,6 +265,9 @@ class Burger(Savory):
 
 
 class Pizza(Savory):
+    slice_price = 5.99
+    ten_in_price = 14.99
+    the_jeremiah_special_price = 0.99
 
     def __init__(self, username, total, item_list):
         super().__init__(username)
@@ -284,25 +289,42 @@ class Pizza(Savory):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering a pizza.")
 
+
+    def update_pizza_costs(self):
+        """Update class pizza prices"""
+
+        old_slice_cost = Pizza.slice_price
+        old_ten_in_cost = Pizza.ten_in_price
+        old_jeremiah_special_cost = Pizza.the_jeremiah_special_price
+
+        Pizza.slice_price = float(input("Enter new slice cost: $"))
+        Pizza.ten_in_price = float(input("Enter new 10in pizza cost: $"))
+        Pizza.the_jeremiah_special_price = float(input("Enter new Jeremiah Special cost: $"))
+        
+        print("")
+        print("Updated pizza prices \n")
+        print(f"Slice: ${old_slice_cost} --> ${Pizza.slice_price}")
+        print(f"10in Pizza: ${old_ten_in_cost} --> ${Pizza.ten_in_price}")
+        print(f"Jeremiah Special: ${old_jeremiah_special_cost} --> ${Pizza.the_jeremiah_special_price}")
+
+
     def update_total(self):
-        slice_price = 5.99
-        ten_in_price = 14.99
-        the_jeremiah_special = 0.99
+        """Totals the user's items"""
 
         for item in self.item_list:
             if item == "slice":
-                self.total += slice_price
+                self.total += Pizza.slice_price
             elif item == "10in":
-                self.total += ten_in_price
+                self.total += Pizza.ten_in_price
             else:
-                self.total += the_jeremiah_special
+                self.total += Pizza.the_jeremiah_special_price
 
-        print(f"Total cost: ${round(self.total, 2)}")
+        print(f"{self.username}'s total: ${round(self.total, 2)}")
         return round(self.total, 2)
 
 
     def pizza_creator(self):
-        """Create a user-defined pizza"""
+        """Add user-picked pizzas to the cart"""
 
         graphics = []
         slice_graphic = """
@@ -413,7 +435,7 @@ class Pizza(Savory):
                                                                 ░░░░▒▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒░░░░                                                                """
 
         while True:
-            pizza_size = (input("What size pizza are you feeling? \n 1. A Slice \n 2. 10in \n 3. 40in (Just for Jeremiah) \n 4. No more pizza please \n Your choice: ")).lower()
+            pizza_size = (input(f"What size pizza are you feeling? \n 1. A slice  ${Pizza.slice_price}\n 2. 10in     ${Pizza.ten_in_price}\n 3. 40in     ${Pizza.the_jeremiah_special_price}\n 4. No more pizza please \n Your choice: ")).lower()
 
             if pizza_size == "1" or pizza_size == "slice" or pizza_size == "a slice":
                 self.item_list.append("slice")
@@ -442,5 +464,5 @@ class Pizza(Savory):
 
 #------------------- Object Creation -------------------
 
-test_user = Burger("testuser", 10, ["test"])
-test_user.update_ingredients_costs()
+test_user = Pizza("testuser", 10, ["test"])
+test_user.update_pizza_costs()
