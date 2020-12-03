@@ -131,7 +131,75 @@ class Sweet(Welcome):
         return self.chosen_item
 
 
+class Burger(Savory):
+
+    def __init__(self, username, type = 0, patties_count = 0, ingredients = []):
+        super().__init__(username)
+
+    def burger_type(self):
+        """Does the user want a sandwhich or burger?"""
+
+    def burger_creator(self):
+        """Create a burger graphic from user inputs"""
+
+        # Create variables with graphics pertaining to ingredients
+        top_bun = " ┌──────┐"
+        patty = "▄▄▄▄▄▄▄▄▄▄"
+        lettuce = " ~~~~~~~~"
+        pickle = " ********"
+        tomato = " oooooooo"
+        cheese = "──────────"
+        bottom_bun = " └──────┘"
+
+        # Automatically add a bun to ingredients list. A burger isn't a burger without a bun. I don't care if you're on keto.
+        burger_ingredients = [top_bun]
+
+        while True:
+            # Ingredient selection prompt
+            new_ingredient = (input("\n Choose an ingredient: \n 1. Patty \n 2. Lettuce \n 3. Pickle \n 4. Tomato \n 5. Cheese \n 6. Done \n Your Choice: ")).lower()
+
+            # Append ingredient to list or end loop
+            if new_ingredient == "1" or new_ingredient == "patty":
+                burger_ingredients.append(patty)
+                print("Patty added")
+                continue
+            elif new_ingredient == "2" or new_ingredient == "lettuce":
+                burger_ingredients.append(lettuce)
+                print("Lettuce added")
+                continue
+            elif new_ingredient == "3" or new_ingredient == "pickle":
+                burger_ingredients.append(pickle)
+                print("Pickle(s) added")
+                continue
+            elif new_ingredient == "4" or new_ingredient == "tomato":
+                burger_ingredients.append(tomato)
+                print("Tomato added")
+                continue
+            elif new_ingredient == "5" or new_ingredient == "cheese":
+                burger_ingredients.append(cheese)
+                print("Cheese added")
+                continue
+            elif new_ingredient == "6" or new_ingredient == "done":
+                print("Burger completed \n")
+                burger_ingredients.append(bottom_bun)
+                break
+            else:
+                print("Invalid option")
+                continue
+
+        # Present the burger to the user
+        if len(burger_ingredients) == 2:
+            print(top_bun)
+            print("")
+            print(bottom_bun)
+            print("You really just wanted buns, hun?")
+        else:
+            print("\n Here's your burger \n")
+            for item in burger_ingredients:
+                print(item)
+
+
 #------------------- Object Creation -------------------
 
-test_user = Sweet("testuser")
-test_user.display_recipes()
+test_user = Burger("testuser")
+test_user.burger_creator()
