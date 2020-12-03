@@ -132,9 +132,16 @@ class Sweet(Welcome):
 
 
 class Burger(Savory):
+    patty_cost = 1.49
+    lettuce_cost = 0.05
+    pickle_cost = 0.15
+    tomato_cost = 0.25
+    cheese_cost = 0.75
 
-    def __init__(self, username, total = 0):
+    def __init__(self, username, total, ingredients):
         super().__init__(username)
+        self.total = 0
+        self.ingredients = []
 
     def change_name(self):
         """Change user's name"""
@@ -150,6 +157,45 @@ class Burger(Savory):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering a burger.")
 
+
+    def update_ingredients_costs(self):
+
+        old_patty_cost = Burger.patty_cost
+        old_lettuce_cost = Burger.lettuce_cost
+        old_pickle_cost = Burger.pickle_cost
+        old_tomato_cost = Burger.tomato_cost
+        old_cheese_cost = Burger.cheese_cost
+
+        Burger.patty_cost = float(input("Enter new patty cost: $"))
+        Burger.lettuce_cost = float(input("Enter new lettuce cost: $"))
+        Burger.pickle_cost = float(input("Enter new pickle cost: $"))
+        Burger.tomato_cost = float(input("Enter new tomato cost: $"))
+        Burger.cheese_cost = float(input("Enter new cheese cost: $"))
+        
+        print("")
+        print("Updated ingredient prices \n")
+        print(f"Patty: ${old_patty_cost} --> ${Burger.patty_cost}")
+        print(f"Lettuce: ${old_lettuce_cost} --> ${Burger.lettuce_cost}")
+        print(f"Pickle: ${old_pickle_cost} --> ${Burger.pickle_cost}")
+        print(f"Tomato: ${old_tomato_cost} --> ${Burger.tomato_cost}")
+        print(f"Cheese: ${old_cheese_cost} --> ${Burger.cheese_cost}")
+
+    def update_total(self):
+
+        for ingredient in self.ingredients:
+            if ingredient == "patty":
+                self.total += Burger.patty_cost
+            elif ingredient == "lettuce":
+                self.total += Burger.lettuce_cost
+            elif ingredient == "pickle":
+                self.total += Burger.pickle_cost
+            elif ingredient == "tomato":
+                self.total += Burger.tomato_cost
+            else:
+                self.total += Burger.cheese_cost
+        
+        print(f"{self.username}'s total: ${round(self.total, 2)}")
+        return round(self.total, 2)
 
     def burger_creator(self):
         """Create a burger graphic from user inputs"""
@@ -168,26 +214,31 @@ class Burger(Savory):
 
         while True:
             # Ingredient selection prompt
-            new_ingredient = (input("\n Choose an ingredient: \n 1. Patty \n 2. Lettuce \n 3. Pickle \n 4. Tomato \n 5. Cheese \n 6. Done \n Your Choice: ")).lower()
+            new_ingredient = (input(f"\n Choose an ingredient: \n 1. Patty   ${Burger.patty_cost}\n 2. Lettuce ${Burger.lettuce_cost}\n 3. Pickle  ${Burger.pickle_cost}\n 4. Tomato  ${Burger.tomato_cost}\n 5. Cheese  ${Burger.cheese_cost}\n 6. Done \n Your Choice: ")).lower()
 
             # Append ingredient to list or end loop
             if new_ingredient == "1" or new_ingredient == "patty":
+                self.ingredients += "patty"
                 burger_ingredients.append(patty)
                 print("Patty added")
                 continue
             elif new_ingredient == "2" or new_ingredient == "lettuce":
+                self.ingredients += "lettuce"
                 burger_ingredients.append(lettuce)
                 print("Lettuce added")
                 continue
             elif new_ingredient == "3" or new_ingredient == "pickle":
+                self.ingredients += "pickle"
                 burger_ingredients.append(pickle)
-                print("Pickle(s) added")
+                print("Pickles added")
                 continue
             elif new_ingredient == "4" or new_ingredient == "tomato":
+                self.ingredients += "tomato"
                 burger_ingredients.append(tomato)
-                print("Tomato added")
+                print("Tomatoes added")
                 continue
             elif new_ingredient == "5" or new_ingredient == "cheese":
+                self.ingredients += "cheese"
                 burger_ingredients.append(cheese)
                 print("Cheese added")
                 continue
@@ -206,7 +257,7 @@ class Burger(Savory):
             print(bottom_bun)
             print("You really just wanted buns, hun?")
         else:
-            print("\n Here's your burger \n")
+            print("\n Here's your burger!\n")
             for item in burger_ingredients:
                 print(item)
 
@@ -391,4 +442,5 @@ class Pizza(Savory):
 
 #------------------- Object Creation -------------------
 
-test_user = Pizza("testuser", 10, ["test"])
+test_user = Burger("testuser", 10, ["test"])
+test_user.update_ingredients_costs()
