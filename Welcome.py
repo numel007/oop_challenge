@@ -19,7 +19,7 @@ class Welcome:
 
         # Alter hunger class attribute to whatever user inputs
         while True:
-            hunger_status = input("Are you hungry? Y/N ")
+            hunger_status = input("Are you hungry? (Y/N): ")
 
             if hunger_status.upper() == "Y":
                 self.hunger = True
@@ -28,7 +28,7 @@ class Welcome:
                 self.hunger = False
                 break
             else:
-                print("Invalid hunger status. Try again.")
+                print("Invalid input. Try again.")
                 continue
         
         print(f"Hunger status set to {self.hunger}")
