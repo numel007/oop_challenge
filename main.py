@@ -26,5 +26,28 @@ def create_user():
     created_user = Welcome(username, hunger_status)
 
 
+def welcome_options(user):
+
+    while True:
+
+        selected_option = (input("Select an option\n 1. Change name\n 2. Change hunger status\n 3. View user info\n 4. Quit\n Your choice: ")).lower()
+
+        if selected_option == "1" or selected_option == "change name" or selected_option == "name":
+            user.change_name()
+            break
+        elif selected_option == "2" or selected_option == "change hunger status" or selected_option == "hunger":
+            user.is_hungry()
+            break
+        elif selected_option == "3" or selected_option == "view info" or selected_option == "view user info" or selected_option == "info":
+            user.known_info()
+            break
+        elif selected_option == "4" or selected_option == "exit" or selected_option == "quit":
+            print("Exiting program")
+            exit()
+        else:
+            print("Invalid input. Try again.\n")
+            continue
+
 # ------------ Test Object Creation ------------
 create_user()
+welcome_options(created_user)
