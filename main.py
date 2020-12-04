@@ -155,29 +155,29 @@ class Burger(Savory):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering a burger.")
 
-
-    def update_ingredients_costs(self):
+    @classmethod
+    def update_ingredients_costs(cls):
         """Update class ingredient prices"""
 
-        old_patty_cost = Burger.patty_cost
-        old_lettuce_cost = Burger.lettuce_cost
-        old_pickle_cost = Burger.pickle_cost
-        old_tomato_cost = Burger.tomato_cost
-        old_cheese_cost = Burger.cheese_cost
+        old_patty_cost = cls.patty_cost
+        old_lettuce_cost = cls.lettuce_cost
+        old_pickle_cost = cls.pickle_cost
+        old_tomato_cost = cls.tomato_cost
+        old_cheese_cost = cls.cheese_cost
 
-        Burger.patty_cost = float(input("Enter new patty cost: $"))
-        Burger.lettuce_cost = float(input("Enter new lettuce cost: $"))
-        Burger.pickle_cost = float(input("Enter new pickle cost: $"))
-        Burger.tomato_cost = float(input("Enter new tomato cost: $"))
-        Burger.cheese_cost = float(input("Enter new cheese cost: $"))
+        cls.patty_cost = float(input("Enter new patty cost: $"))
+        cls.lettuce_cost = float(input("Enter new lettuce cost: $"))
+        cls.pickle_cost = float(input("Enter new pickle cost: $"))
+        cls.tomato_cost = float(input("Enter new tomato cost: $"))
+        cls.cheese_cost = float(input("Enter new cheese cost: $"))
         
         print("")
         print("Updated ingredient prices \n")
-        print(f"Patty: ${old_patty_cost} --> ${Burger.patty_cost}")
-        print(f"Lettuce: ${old_lettuce_cost} --> ${Burger.lettuce_cost}")
-        print(f"Pickle: ${old_pickle_cost} --> ${Burger.pickle_cost}")
-        print(f"Tomato: ${old_tomato_cost} --> ${Burger.tomato_cost}")
-        print(f"Cheese: ${old_cheese_cost} --> ${Burger.cheese_cost}")
+        print(f"Patty: ${old_patty_cost} --> ${cls.patty_cost}")
+        print(f"Lettuce: ${old_lettuce_cost} --> ${cls.lettuce_cost}")
+        print(f"Pickle: ${old_pickle_cost} --> ${cls.pickle_cost}")
+        print(f"Tomato: ${old_tomato_cost} --> ${cls.tomato_cost}")
+        print(f"Cheese: ${old_cheese_cost} --> ${cls.cheese_cost}")
 
     def update_total(self):
         """Totals the user's items"""
@@ -289,22 +289,23 @@ class Pizza(Savory):
         print(f"{self.username} is ordering a pizza.")
 
 
-    def update_pizza_costs(self):
+    @classmethod
+    def update_pizza_costs(cls):
         """Update class pizza prices"""
 
-        old_slice_cost = Pizza.slice_price
-        old_ten_in_cost = Pizza.ten_in_price
-        old_jeremiah_special_cost = Pizza.the_jeremiah_special_price
+        old_slice_cost = cls.slice_price
+        old_ten_in_cost = cls.ten_in_price
+        old_jeremiah_special_cost = cls.the_jeremiah_special_price
 
-        Pizza.slice_price = float(input("Enter new slice cost: $"))
-        Pizza.ten_in_price = float(input("Enter new 10in pizza cost: $"))
-        Pizza.the_jeremiah_special_price = float(input("Enter new Jeremiah Special cost: $"))
+        cls.slice_price = float(input("Enter new slice cost: $"))
+        cls.ten_in_price = float(input("Enter new 10in pizza cost: $"))
+        cls.the_jeremiah_special_price = float(input("Enter new Jeremiah Special cost: $"))
         
         print("")
         print("Updated pizza prices \n")
-        print(f"Slice: ${old_slice_cost} --> ${Pizza.slice_price}")
-        print(f"10in Pizza: ${old_ten_in_cost} --> ${Pizza.ten_in_price}")
-        print(f"Jeremiah Special: ${old_jeremiah_special_cost} --> ${Pizza.the_jeremiah_special_price}")
+        print(f"Slice: ${old_slice_cost} --> ${cls.slice_price}")
+        print(f"10in pizza: ${old_ten_in_cost} --> ${cls.ten_in_price}")
+        print(f"Jeremiah Special: ${old_jeremiah_special_cost} --> ${cls.the_jeremiah_special_price}")
 
 
     def update_total(self):
@@ -475,5 +476,5 @@ class Pizza(Savory):
 
 #------------------- Object Creation -------------------
 
-test_user = Burger("testuser")
-print(test_user.total)
+test_user = Pizza("testuser")
+test_user.update_pizza_costs()
