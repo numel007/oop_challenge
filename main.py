@@ -330,7 +330,7 @@ class Pizza(Savory):
     def pizza_creator(self):
         """Add user-picked pizzas to the cart"""
         
-        # Create empty list to store graphics in
+        # Create empty list to store graphics
         graphics = []
 
         # Pizza graphics
@@ -541,8 +541,10 @@ class Pie(Sweet):
 
     def pie_picker(self):
         """Picks a pie graphic(s) and updates total"""
-
+        # Create list to store graphics
         graphics_list = []
+
+        # Pie graphics
         pumpkin_pie_graphic = """                      ██████                              
               ████████      ██                            
             ██░░░░██        ██████                        
@@ -669,6 +671,7 @@ class Pie(Sweet):
                                                                     ░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░                                                                      
                                                                                     ░░  ░░░░░░                                                                                          
 """
+        # Add pies to item_list and graphics to graphics_list
         while True:
             pie_choice = (input(f"What kind of pie do you want? \n 1. Pumpkin Pie Slice ${Pie.pumpkin_pie_slice_price} \n 2. Cherry Pie Slice  ${Pie.cherry_pie_slice_price}\n 3. Whole Apple Pie   ${Pie.whole_apple_pie_price}\n 4. No Pie \n Your choice: ")).lower()
 
