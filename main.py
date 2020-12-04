@@ -460,19 +460,19 @@ class Pizza(Savory):
             if pizza_size == "1" or pizza_size == "slice" or pizza_size == "a slice":
                 self.item_list.append("slice")
                 graphics.append(slice_graphic)
-                print("1 slice added to your cart")
+                print("1 slice added to your card\n")
                 continue
 
             elif pizza_size == "2" or pizza_size == "10" or pizza_size == "10in" or pizza_size == "10 in":
                 self.item_list.append("10in")
                 graphics.append(ten_in_graphic)
-                print("10inch pizza added to your cart")
+                print("10inch pizza added to your card\n")
                 continue
                           
             elif pizza_size == "3" or pizza_size == "40" or pizza_size == "40in" or pizza_size == "40 in":
                 self.item_list.append("jeremiah special")
                 graphics.append(the_jeremiah_special_graphic)
-                print("40inch pizza added to your cart. Family size? More like personal sized.")
+                print("40inch pizza added to your card\n. Family size? More like personal sized.")
                 continue
             elif pizza_size == "4":
                 print("No pizza ordered")
@@ -563,7 +563,8 @@ class Pie(Sweet):
 
     def pie_picker(self):
         """Picks a pie graphic(s) and updates total"""
-        # Create list to store graphics
+
+        # Create list to store pie graphics
         graphics_list = []
 
         # Pie graphics
@@ -703,19 +704,19 @@ class Pie(Sweet):
             if pie_choice == "1" or pie_choice == "pumpkin" or pie_choice == "pumpkin pie" or pie_choice == "pumpkin pie slice":
                 self.item_list.append("pumpkin slice")
                 graphics_list.append(pumpkin_pie_graphic)
-                print("1 slice of pumpkin pie added to your cart")
+                print("1 slice of pumpkin pie added to your card\n")
                 continue
 
             elif pie_choice == "2" or pie_choice == "cherry" or pie_choice == "cherry pie" or pie_choice == "cherry pie slice":
                 self.item_list.append("cherry slice")
                 graphics_list.append(cherry_pie_graphic)
-                print("1 slice of cherry pie added to your cart")
+                print("1 slice of cherry pie added to your card\n")
                 continue
 
             elif pie_choice == "3" or pie_choice == "apple" or pie_choice == "apple pie" or pie_choice == "whole apple pie":
                 self.item_list.append("whole apple pie")
                 graphics_list.append(whole_apple_pie_graphic)
-                print("1 whole apple pie added to your cart. Still cheaper than seeing a therapist amirite?")
+                print("1 whole apple pie added to your card\n. Still cheaper than seeing a therapist amirite?")
                 continue
 
             elif pie_choice == "4" or pie_choice == "no pie":
@@ -738,8 +739,254 @@ class Pie(Sweet):
         for graphic in graphics_list:
             print(graphic)
 
+
+# Inherits username from Sweet clas, provides methods for ordering cake
+class Cake(Sweet):
+    """Instantiates with username"""
+
+    # Cake Prices
+    white_cake_price = 4.99
+    crepe_cake_price = 5.49
+    birthday_cake_price = 18.01
+
+    def __init__(self, username, total = 0, item_list = []):
+        super().__init__(username)
+        self.total = total
+        self.item_list = item_list
+
+
+    def change_name(self):
+        """Change user's name"""
+
+        new_name = input("What would you like your new name to be? ")
+        self.username = new_name
+        print(f"User's name changed to: {self.username}")
+
+
+    def known_info(self):
+        """Prints user's information"""
+
+        print(f"Username: {self.username}")
+        print(f"{self.username} is ordering cake.")
+
+
+    @classmethod
+    def update_cake_prices(cls):
+        """Update cake prices"""
+
+        # Store old prices for later usage
+        old_white_cake_cost = cls.white_cake_price
+        old_crepe_cake_price = cls.crepe_cake_price
+        old_birthday_cake_price = cls.birthday_cake_price
+
+        # New price prompt
+        cls.white_cake_price = float(input("Enter new white cake price: $"))
+        cls.crepe_cake_price = float(input("Enter new crepe cake price: $"))
+        cls.birthday_cake_price = float(input("Enter new birthday cake price: $"))
+
+        # Print comparison of old to new price
+        print("")
+        print("Updated cake prices \n")
+        print(f"White cake: ${old_white_cake_cost}  -->  ${cls.white_cake_price}")
+        print(f"Crepe cake: ${old_crepe_cake_price}  -->  ${cls.crepe_cake_price}")
+        print(f"Birthday cake: ${old_birthday_cake_price}  -->  ${cls.birthday_cake_price}")
+
+
+    def update_total(self):
+        """Totals the user's items"""
+
+        for item in self.item_list:
+            if item == "white cake":
+                self.total += Cake.white_cake_price
+            elif item == "crepe cake":
+                self.total += Cake.crepe_cake_price
+            elif item == "birthday cake":
+                self.total += Cake.birthday_cake_price
+
+        print(f"{self.username}'s total: ${round(self.total, 2)}")
+        return round(self.total, 2)
+
+        
+    def cake_picker(self):
+        """Picks a cake graphic and updates total"""
+
+        # Create list to store cake graphics
+        graphics_list = []
+
+        # Cake graphics
+        white_cake_graphic = """                                            ██            ▒▒▒▒▒▒  ▒▒▒▒▒▒                                    
+                                      ██████  ████      ▒▒░░░░░░▒▒░░▒▒░░▒▒                                  
+                                  ████    ██      ████  ▒▒░░░░░░░░░░▒▒░░▒▒▒▒▒▒                              
+                                ██        ██      ░░░░▒▒░░▒▒░░░░░░░░░░░░░░░░░░▒▒                            
+                              ██      ████        ░░▒▒░░░░░░▒▒▒▒░░░░░░░░▒▒░░░░▒▒                            
+                              ██                ░░░░▒▒  ░░▒▒░░░░░░▒▒░░░░░░▒▒▒▒                              
+                            ██                  ░░▒▒  ░░░░▒▒░░░░░░▒▒░░░░░░▒▒▒▒▒▒                            
+                            ██                  ░░▒▒  ░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒                            
+                          ██░░                ░░░░▒▒  ░░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒                            
+                      ████    ░░░░        ░░░░░░░░▒▒░░░░░░░░▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒                            
+                    ▓▓            ░░░░░░░░░░░░░░░░▒▒░░░░░░░░▒▒░░▒▒░░░░▒▒░░▒▒▒▒▒▒                            
+                  ██                  ░░░░░░░░░░  ░░▒▒▒▒▒▒▒▒░░▒▒░░░░░░▒▒▒▒▒▒▒▒                              
+                  ██░░░░                          ░░▒▒▒▒▒▒░░▒▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒                              
+                  ██░░░░░░░░                        ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░██                            
+                  ██░░░░░░░░░░░░░░░░░░░░░░            ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░    ██                          
+                  ██░░░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░    ░░░░▒▒▒▒▒▒▒▒▒▒░░░░        ▓▓                        
+                  ██░░░░                  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░              ██                      
+                  ██░░░░░░      ▒▒        ░░░░  ░░░░░░░░░░░░░░░░░░░░░░░░              ▓▓                    
+                  ██░░░░░░        ░░                          ░░░░░░░░░░░░░░░░░░        ██                  
+                  ██░░░░░░        ░░                          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓                
+                  ██░░░░░░                                  ▒▒          ░░      ░░░░░░░░  ██                
+                  ██░░░░░░░░░░░░░░            ▒▒              ░░                          ██                
+                  ██░░░░░░░░░░░░░░░░░░░░░░░░    ░░                                        ██                
+                  ██▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░                      ▒▒            ██                
+                  ██░░░░░░▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░              ░░          ██                
+                  ██░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                ██                
+                  ██░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░        ██                
+              ██▓▓██░░░░▒▒░░░░░░░░          ░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░  ░░░░░░██                
+          ████▒▒▒▒░░░░░░░░░░░░░░░░░░                  ░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░▒▒██████          
+      ▓▓▓▓▒▒▒▒    ░░░░░░░░░░░░░░░░░░                            ░░░░░░░░░░▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓▓      
+    ██▒▒▒▒        ░░░░░░░░░░░░░░░░░░░░░░            ▒▒                    ░░░░░░░░▒▒▒▒▒▒▒▒▒▒      ▒▒▒▒████  
+  ██▒▒            ░░░░░░░░░░░░░░░░░░▒▒░░░░░░          ░░                    ░░    ░░░░░░░░░░          ▒▒▒▒██
+  ██▒▒    ░░░░▒▒  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                      ▒▒            ░░    ░░░░░░░░░░▒▒
+██▒▒    ▓▓      ░░░░      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░              ░░          ░░░░░░          ░░
+██▒▒    ▓▓░░░░░░░░  ░░░░░░░░      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░      ░░░░░░░░░░░░
+  ██▒▒    ▒▒▒▒░░░░░░        ░░░░            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      ░░░░░░░░░░░░░░░░░░
+  ██▒▒▒▒      ▒▒▒▒▒▒░░░░░░░░    ░░░░                  ░░░░░░░░░░░░░░░░░░░░  ░░      ░░░░░░░░░░░░░░░░░░░░░░░░
+    ██▒▒░░░░░░      ▒▒▒▒▓▓░░░░░░    ▒▒░░░░░░░░░░░░░░░░░░░░░░░░            ░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓
+        ▒▒▓▓▓▓░░░░░░      ░░░░░░░░░░                          ░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▓▓░░░░░░▒▒▒▒▓▓
+      ▒▒      ▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░  ▒▒▒▒▓▓▓▓  
+      ▒▒░░░░░░      ▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░            ▒▒▒▒▒▒████      
+        ▒▒▓▓░░▒▒░░░░      ░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░                ▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓  ░░      
+            ▒▒▒▒░░░░░░░░░░░░░░▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓                
+                ▒▒▒▒▒▒▒▒▒▒▒▒▓▓    ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░                
+"""
+        crepe_cake_graphic = """                                                          ▒▒▒▒▒▒▒▒░░                                      
+                                                        ██████████████████                                
+                                                      ▒▒██████████████████▓▓▓▓▓▓                          
+                                                    ▒▒████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░                    
+                                                  ██████▒▒░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██                
+                                                ██████▒▒░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░▒▒▓▓▓▓▓▓▓▓██░░            
+                                              ██████▓▓▓▓▓▓▓▓▒▒░░▒▒▓▓▓▓▓▓░░░░░░░░▒▒▒▒▓▓▓▓██████████        
+                                            ▓▓██████▒▒░░▒▒▓▓░░▒▒▒▒▓▓▓▓▓▓░░░░░░▒▒▒▒▒▒██████████████▒▒      
+                                          ██████▓▓▒▒░░▒▒▒▒▒▒▓▓▒▒▒▒▓▓▓▓░░░░░░▒▒▒▒▒▒▒▒██████████████████    
+                                        ▓▓████▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓░░░░▒▒▒▒▒▒▒▒██████████████████████  
+                                      ▒▒████▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓░░▒▒▒▒▒▒▒▒▓▓██████████████████████▒▒
+                                    ████▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒██████████████████████░░░░████▓▓
+                                  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████████████████████████▓▓▓▓██▓▓▓▓
+                                ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓████████████████████████████████░░░░████▓▓▓▓▒▒▓▓
+                              ▓▓██░░░░░░░░░░░░▒▒▒▒▒▒▒▒██████████████████████████████████████████▓▓▓▓▓▓▓▓▓▓
+                          ░░▓▓████░░░░░░░░░░░░░░░░░░▓▓██████████████████████░░░░██████████████▓▓▓▓▓▓▓▓▒▒▓▓
+                        ████████▓▓▓▓░░░░░░░░░░░░██████████████████████░░░░██████░░████████████▓▓▓▓▒▒▒▒  ▓▓
+                      ▓▓██████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████████████████▓▓▓▓██▓▓▓▓▓▓░░████████▒▒▒▒▒▒░░░░  ▓▓
+                    ██████▓▓▓▓▓▓▓▓▓▓██████████████████████░░██████████████▒▒▒▒▒▒▒▒██░░██████          ▒▒▓▓
+                  ▓▓████▓▓▓▓▓▓▓▓████████████████████░░██████░░██████████▓▓▓▓▓▓▓▓▒▒▒▒██░░██        ▒▒▒▒▓▓▓▓
+                ██████▓▓▓▓████████████████████░░████▓▓██████▒▒░░████████▓▓▒▒▒▒▒▒    ██░░██  ░░░░░░▒▒▒▒▓▓▓▓
+              ████▓▓▓▓██████████████████░░░░██████▓▓▓▓▓▓▒▒▒▒████░░██████▒▒          ██░░██▒▒▓▓▓▓▓▓▓▓▓▓▒▒▓▓
+            ▓▓██▓▓████████████████░░░░██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██░░████░░░░      ▒▒░░██▓▓██▒▒▓▓▓▓▓▓▒▒▒▒░░▓▓
+          ████▓▓████████░░░░░░░░██████▓▓▓▓▓▓▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒████░░██    ▒▒▒▒▒▒▓▓▓▓▒▒████▒▒▒▒▒▒▒▒      ▓▓
+        ████▓▓████░░░░░░████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒        ██░░██▒▒▒▒▓▓▒▒▒▒▓▓▓▓▓▓████▒▒          ▒▒▓▓
+    ▓▓▓▓██▓▓░░░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░      ░░██░░██▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒████        ░░░░▒▒▓▓
+  ██░░░░░░░░██████▓▓▓▓▓▓▒▒▒▒▒▒▓▓▓▓▓▓▓▓▒▒▒▒▒▒            ▒▒▒▒▒▒▓▓██░░██▓▓▓▓▒▒▒▒▒▒      ████  ▒▒▒▒▒▒▓▓▓▓▓▓▓▓
+  ▓▓▓▓▓▓▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░      ▒▒▒▒░░▒▒▒▒▒▒▒▒██░░██▒▒▒▒░░░░░░      ████░░▒▒▒▒▒▒▓▓▓▓▒▒▓▓
+  ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒░░            ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒██░░██          ▒▒▒▒▒▒████▓▓▓▓▓▓▓▓▒▒▒▒  ▓▓
+  ▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒              ▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒  ██░░██    ▒▒▒▒▒▒▓▓▒▒▒▒████▒▒▒▒▒▒▒▒      ▓▓
+  ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░        ░░░░░░▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░  ██▓▓██▒▒░░▒▒▒▒▒▒▓▓▓▓▓▓████▒▒░░░░░░    ░░▓▓
+  ▓▓▒▒▒▒▒▒░░            ▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒            ▒▒▒▒██▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒████        ▒▒▒▒▓▓▓▓
+  ▓▓░░░░░░░░      ▒▒▒▒░░▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░      ▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░██░░██▓▓▒▒▒▒▒▒▒▒▒▒▓▓▓▓
+  ▓▓      ░░▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒            ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒          ██░░████▓▓▓▓▓▓▓▓▓▓██  
+  ▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒            ▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒            ▒▒▒▒██░░██████▓▓▓▓▓▓▓▓    
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒              ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒            ▒▒▒▒▒▒▓▓██░░██████████▓▓        
+  ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒              ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒            ▒▒▒▒▒▒▓▓▓▓▓▓▓▓██░░██████████          
+  ▓▓▒▒▒▒▒▒▒▒░░░░░░      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░      ▒▒▒▒░░▒▒▒▒▒▒▓▓▓▓▓▓▓▓██▒▒░░░░████            
+  ▓▓              ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒            ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▓▓▓▓██    ████████              
+  ▓▓        ▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒            ▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▒▒▓▓▓▓▓▓                                
+  ▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░            ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██                                      
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒              ▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                                            
+  ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░          ▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓                                                  
+  ▓▓▒▒▒▒▒▒░░            ▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██                                                        
+  ▓▓              ▒▒▒▒▒▒▓▓▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓                                                              
+  ▓▓      ░░▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██                                                                    
+  ▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▓▓▓▓▓▓░░                                                                          
+  ▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓                                                                                  
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓██                                                                                        
+    ██▓▓▓▓▓▓                                                                                              
+"""
+        birthday_cake_graphic = """░░                ▒▒░░▒▒        ░░        ▒▒░░▒▒                  
+░░░░░░              ▒▒        ██████        ▒▒    ░░░░  ░░░░  ░░  
+                  ██████      ██▒▒██      ██████                  
+░░░░              ██▒▒██      ██▒▒██      ██▒▒██    ░░            
+                  ██▒▒██      ██▒▒██      ██▒▒██                  
+░░        ░░  ░░  ██▒▒██      ██▒▒██      ██▒▒██                  
+░░░░      ░░      ██▒▒████▒▒▒▒██▒▒████▒▒▒▒██▒▒██                  
+░░░░    ░░    ▓▓▓▓██▒▒██▓▓░░▒▒██▒▒██▓▓░░▒▒██▒▒██▓▓▓▓              
+░░░░      ████▒▒  ██▒▒██  ▒▒  ██▒▒██  ▒▒  ██▒▒██  ▒▒████          
+░░      ██  ▒▒  ▒▒██▒▒██▒▒  ▒▒██▒▒██▒▒  ▒▒██▒▒██▒▒  ▒▒  ██        
+░░░░░░  ██░░░░░░░░██▒▒██░░░░░░▓▓████░░░░░░▓▓████░░░░░░░░██        
+░░░░    ██▒▒▒▒  ▒▒  ████▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒▒▒██        
+░░░░    ██▒▒▒▒▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒▒▒▒▒██        
+░░      ██    ▒▒▒▒▒▒▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒  ▒▒▒▒▒▒▒▒    ██        
+░░░░    ██    ░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░    ██░░      
+░░░░░░  ██                                              ██░░  ░░  
+░░░░    ██    ░░              ░░              ░░        ██        
+░░░░  ██        ▒▒              ▒▒              ▒▒        ██░░    
+      ██▒▒▒▒          ▒▒▒▒▒▒          ▒▒▒▒▒▒          ▒▒▒▒██      
+░░    ██░░░░▒▒      ▒▒░░░░░░▒▒      ▒▒░░░░░░▒▒      ▒▒░░░░██      
+      ██▒▒░░░░▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒░░▒▒░░██      
+░░░░  ██░░▒▒░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░▒▒██      
+░░  ██▒▒██░░░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░██▒▒██    
+▒▒██░░▒▒▒▒████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░████▒▒▒▒░░██  
+▒▒██░░░░▒▒▒▒▒▒██████░░░░░░░░░░░░░░░░░░░░░░░░░░██████▒▒▒▒▒▒░░░░██  
+░░░░██░░▒▒▒▒▒▒▒▒▒▒▒▒██████████████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒██    
+░░░░  ████░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░████      
+░░        ████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░████████          
+"""
+
+        # Add cakes to item_list and graphics to graphics_list
+        while True:
+
+            # Cake selection prompt
+            cake_choice = (input(f"What cake do you want? \n 1. White cake ${Cake.white_cake_price} \n 2. Crêpe Cake ${Cake.crepe_cake_price} \n 3. Whole birthday cake (with candles!)${Cake.birthday_cake_price} \n 4. No cake \n Your choice: ")).lower()
+
+            # Append graphics and items to their corresponding lists
+            if cake_choice == "1" or cake_choice == "white cake" or cake_choice == "white":
+                self.item_list.append("white cake")
+                graphics_list.append(white_cake_graphic)
+                print("1 slice of white cake added to your card\n")
+                continue
+
+            elif cake_choice == "2" or cake_choice == "crepe cake" or cake_choice == "crepe":
+                self.item_list.append("crepe cake")
+                graphics_list.append(crepe_cake_graphic)
+                print("1 slice of crêpe cake added to your card\n")
+                continue
+            
+            elif cake_choice == "3" or cake_choice == "birthday cake" or cake_choice == "birthday":
+                self.item_list.append("birthday cake")
+                graphics_list.append(birthday_cake_graphic)
+                print("1 whole birthday cake added to your card\n")
+
+            elif cake_choice == "4" or cake_choice == "no cake":
+                print("No selection. Order completed.")
+                break
+
+            else:
+                print("Invalid choice. Try again.\n")
+                continue
+
+        # Fun message depending on total iteam quantity
+        if len(self.item_list) > 1:
+            print("\nHere's your cakes!\n")
+        elif len(self.item_list) == 1:
+            print("\nHere's your cake!\n")
+        else:
+            print("\nYou didn't order anything. I'm not running a charity. Get the hell outta my store.")
+
+        # Present the user's order
+        for graphic in graphics_list:
+            print(graphic)
+
+
 #------------------- Object Creation -------------------
 
-test_user = Pie("testuser")
-test_user.pie_picker()
+test_user = Cake("testuser")
+test_user.cake_picker()
 test_user.update_total()
