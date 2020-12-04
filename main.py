@@ -166,18 +166,21 @@ class Burger(Savory):
     def update_ingredients_costs(cls):
         """Update class ingredient prices"""
 
+        # Store old prices for later usage
         old_patty_cost = cls.patty_cost
         old_lettuce_cost = cls.lettuce_cost
         old_pickle_cost = cls.pickle_cost
         old_tomato_cost = cls.tomato_cost
         old_cheese_cost = cls.cheese_cost
 
+        # New price prompt
         cls.patty_cost = float(input("Enter new patty cost: $"))
         cls.lettuce_cost = float(input("Enter new lettuce cost: $"))
         cls.pickle_cost = float(input("Enter new pickle cost: $"))
         cls.tomato_cost = float(input("Enter new tomato cost: $"))
         cls.cheese_cost = float(input("Enter new cheese cost: $"))
         
+        # Print comparison of old to new price
         print("")
         print("Updated ingredient prices \n")
         print(f"Patty: ${old_patty_cost} --> ${cls.patty_cost}")
@@ -207,7 +210,7 @@ class Burger(Savory):
     def burger_creator(self):
         """Create a burger graphic from user inputs"""
 
-        # Create variables with graphics pertaining to ingredients
+        # Graphics pertaining to each ingredient
         top_bun = " ┌──────┐"
         patty = "▄▄▄▄▄▄▄▄▄▄"
         lettuce = " ~~~~~~~~"
@@ -227,34 +230,34 @@ class Burger(Savory):
             if new_ingredient == "1" or new_ingredient == "patty":
                 self.ingredients += "patty"
                 burger_ingredients.append(patty)
-                print("Patty added")
+                print("Patty added\n")
                 continue
             elif new_ingredient == "2" or new_ingredient == "lettuce":
                 self.ingredients += "lettuce"
                 burger_ingredients.append(lettuce)
-                print("Lettuce added")
+                print("Lettuce added\n")
                 continue
             elif new_ingredient == "3" or new_ingredient == "pickle":
                 self.ingredients += "pickle"
                 burger_ingredients.append(pickle)
-                print("Pickles added")
+                print("Pickles added\n")
                 continue
             elif new_ingredient == "4" or new_ingredient == "tomato":
                 self.ingredients += "tomato"
                 burger_ingredients.append(tomato)
-                print("Tomatoes added")
+                print("Tomatoes added\n")
                 continue
             elif new_ingredient == "5" or new_ingredient == "cheese":
                 self.ingredients += "cheese"
                 burger_ingredients.append(cheese)
-                print("Cheese added")
+                print("Cheese added\n")
                 continue
             elif new_ingredient == "6" or new_ingredient == "done":
-                print("Burger completed \n")
+                print("Order complete.\n")
                 burger_ingredients.append(bottom_bun)
                 break
             else:
-                print("Invalid option")
+                print("Invalid option. Try again.\n")
                 continue
 
         # Present the burger to the user
@@ -296,7 +299,7 @@ class Pizza(Savory):
         """Prints user's information"""
 
         print(f"Username: {self.username}")
-        print(f"{self.username} is ordering a pizza.")
+        print(f"{self.username} is ordering pizza.")
 
 
     @classmethod
@@ -944,7 +947,7 @@ class Cake(Sweet):
         while True:
 
             # Cake selection prompt
-            cake_choice = (input(f"What cake do you want? \n 1. White cake ${Cake.white_cake_price} \n 2. Crêpe Cake ${Cake.crepe_cake_price} \n 3. Whole birthday cake (with candles!)${Cake.birthday_cake_price} \n 4. No cake \n Your choice: ")).lower()
+            cake_choice = (input(f"What cake do you want? \n 1. White cake  ${Cake.white_cake_price} \n 2. Crêpe Cake  ${Cake.crepe_cake_price} \n 3. Whole birthday cake (with candles!) ${Cake.birthday_cake_price} \n 4. No cake \n Your choice: ")).lower()
 
             # Append graphics and items to their corresponding lists
             if cake_choice == "1" or cake_choice == "white cake" or cake_choice == "white":
