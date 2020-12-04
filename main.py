@@ -1,7 +1,7 @@
 # Welcome class, includes username entry, hunger status input, change name option
 class Welcome:
+    """Instantiate with username"""
 
-    # Instantiate user with a name and hunger automatically set to True
     def __init__(self, username, hunger = True):
         self.username = username
         self.hunger = hunger
@@ -32,6 +32,7 @@ class Welcome:
                 continue
         
         print(f"Hunger status set to {self.hunger}")
+        return self.hunger
 
 
     def change_name(self):
@@ -42,10 +43,10 @@ class Welcome:
         print(f"User's name changed to: {self.username}")
 
 
-# Inherits from Welcome class, provides method to display savory recipe options
+# Inherits username from Welcome class, provides method to display savory recipe options
 class Savory(Welcome):
+    """Instantiate with username"""
 
-    # Instantiate object with inherited username and empty chosen_item
     def __init__(self, username, hunger = True, chosen_item = ""):
         super().__init__(username)
         self.hunger = hunger
@@ -86,10 +87,10 @@ class Savory(Welcome):
                 continue
 
 
-# Inherits from Welcome class, provides method to display sweet recipe options
+# Inherits username from Welcome class, provides method to display sweet recipe options
 class Sweet(Welcome):
+    """Instantiate with username"""
 
-    # Instantiate object with inherited username and empty chosen_item
     def __init__(self, username, hunger = True, chosen_item = ""):
         super().__init__(username)
         self.hunger = hunger
@@ -131,9 +132,11 @@ class Sweet(Welcome):
 
         return self.chosen_item
 
-
+# Inherits username from Savory class, provides methods for ordering a burger
 class Burger(Savory):
-    """Requires username, initial total, ingredient list"""
+    """Instantiate with username"""
+
+    # Burger ingredient costs
     patty_cost = 1.49
     lettuce_cost = 0.05
     pickle_cost = 0.15
@@ -259,15 +262,18 @@ class Burger(Savory):
             print(top_bun)
             print("")
             print(bottom_bun)
-            print("You really just wanted buns, hun?")
+            print("You really just want buns, hun?")
         else:
             print("\n Here's your burger!\n")
             for item in burger_ingredients:
                 print(item)
 
 
+# Inherits username from Savory class, provides methods for ordering a pizza
 class Pizza(Savory):
-    """Requires username, initial total, and starting item list"""
+    """Instantiate with username"""
+
+    # Pizza prices
     slice_price = 5.99
     ten_in_price = 14.99
     the_jeremiah_special_price = 0.99
@@ -297,14 +303,17 @@ class Pizza(Savory):
     def update_pizza_costs(cls):
         """Update class pizza prices"""
 
+        # Store old prices for later usage
         old_slice_cost = cls.slice_price
         old_ten_in_cost = cls.ten_in_price
         old_jeremiah_special_cost = cls.the_jeremiah_special_price
 
+        # New price prompt
         cls.slice_price = float(input("Enter new slice cost: $"))
         cls.ten_in_price = float(input("Enter new 10in pizza cost: $"))
         cls.the_jeremiah_special_price = float(input("Enter new Jeremiah Special cost: $"))
         
+        # Print comparison of old to new price
         print("")
         print("Updated pizza prices \n")
         print(f"Slice: ${old_slice_cost}  -->  ${cls.slice_price}")
@@ -443,8 +452,11 @@ class Pizza(Savory):
 
         # Add pizzas to item_list and graphics to graphics list
         while True:
+
+            # Pizza selection prompt
             pizza_size = (input(f"What size pizza are you feeling? \n 1. A slice  ${Pizza.slice_price}\n 2. 10in     ${Pizza.ten_in_price}\n 3. 40in     ${Pizza.the_jeremiah_special_price}\n 4. No more pizza please \n Your choice: ")).lower()
 
+            # Append graphic and items to their corresponding lists
             if pizza_size == "1" or pizza_size == "slice" or pizza_size == "a slice":
                 self.item_list.append("slice")
                 graphics.append(slice_graphic)
@@ -469,6 +481,7 @@ class Pizza(Savory):
                 print("Invalid choice. Try again. \n")
                 continue
         
+        # Fun message depending on total item quantity
         if len(self.item_list) > 1:
             print("\nHere's your pizzas!\n")
         elif len(self.item_list) == 1:
@@ -481,7 +494,11 @@ class Pizza(Savory):
             print(graphic)
 
 
+# Inherits username from Sweet class, provide methods for ordering pie
 class Pie(Sweet):
+    """Instatiate with username"""
+
+    # Pie Prices
     pumpkin_pie_slice_price = 3.99
     cherry_pie_slice_price = 3.49
     whole_apple_pie_price = 16.99
@@ -511,19 +528,23 @@ class Pie(Sweet):
     def update_pie_prices(cls):
         """Update pie prices"""
 
+        # Store old prices for later usage
         old_pumpkin_slice_cost = cls.pumpkin_pie_slice_price
         old_cherry_slice_cost = cls.cherry_pie_slice_price
         old_apple_pie_cost = cls.whole_apple_pie_price
 
+        # New price prompt
         cls.pumpkin_pie_slice_price = float(input("Enter new pumpkin pie slice cost: $"))
         cls.cherry_pie_slice_price = float(input("Enter new cherry pie slice cost: $"))
         cls.whole_apple_pie_price = float(input("Enter new whole apple pie cost: $"))
 
+        # Print comparison of old to new price
         print("")
         print("Updated pie prices \n")
         print(f"Pumpkin Pie Slice: ${old_pumpkin_slice_cost}  -->  ${cls.pumpkin_pie_slice_price}")
         print(f"Cherry Pie Slice: ${old_cherry_slice_cost}  -->  ${cls.cherry_pie_slice_price}")
         print(f"Whole Apple Pie: ${old_apple_pie_cost}  -->  ${cls.whole_apple_pie_price}")
+
 
     def update_total(self):
         """Totals the user's items"""
@@ -538,6 +559,7 @@ class Pie(Sweet):
 
         print(f"{self.username}'s total: ${round(self.total, 2)}")
         return round(self.total, 2)
+
 
     def pie_picker(self):
         """Picks a pie graphic(s) and updates total"""
@@ -673,30 +695,38 @@ class Pie(Sweet):
 """
         # Add pies to item_list and graphics to graphics_list
         while True:
+
+            # Pie selection prompt
             pie_choice = (input(f"What kind of pie do you want? \n 1. Pumpkin Pie Slice ${Pie.pumpkin_pie_slice_price} \n 2. Cherry Pie Slice  ${Pie.cherry_pie_slice_price}\n 3. Whole Apple Pie   ${Pie.whole_apple_pie_price}\n 4. No Pie \n Your choice: ")).lower()
 
+            # Append graphics and items to their corresponding lists
             if pie_choice == "1" or pie_choice == "pumpkin" or pie_choice == "pumpkin pie" or pie_choice == "pumpkin pie slice":
                 self.item_list.append("pumpkin slice")
                 graphics_list.append(pumpkin_pie_graphic)
                 print("1 slice of pumpkin pie added to your cart")
                 continue
+
             elif pie_choice == "2" or pie_choice == "cherry" or pie_choice == "cherry pie" or pie_choice == "cherry pie slice":
                 self.item_list.append("cherry slice")
                 graphics_list.append(cherry_pie_graphic)
                 print("1 slice of cherry pie added to your cart")
                 continue
+
             elif pie_choice == "3" or pie_choice == "apple" or pie_choice == "apple pie" or pie_choice == "whole apple pie":
                 self.item_list.append("whole apple pie")
                 graphics_list.append(whole_apple_pie_graphic)
                 print("1 whole apple pie added to your cart. Still cheaper than seeing a therapist amirite?")
                 continue
+
             elif pie_choice == "4" or pie_choice == "no pie":
                 print("No selection. Order completed.")
                 break
+
             else:
                 print("Invalid choice. Try again. \n")
                 continue
 
+        # Fun message depending on total item quantity
         if len(self.item_list) > 1:
             print("\nHere's your pies!\n")
         elif len(self.item_list) == 1:
