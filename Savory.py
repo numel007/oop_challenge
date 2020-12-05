@@ -1,6 +1,7 @@
-from Welcome import Welcome
+from Burger import Burger
+from Pizza import Pizza
 
-class Savory(Welcome):
+class Savory():
     """Instantiate with username"""
 
     def __init__(self, username, hunger = True, chosen_item = ""):

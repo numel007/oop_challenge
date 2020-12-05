@@ -1,5 +1,8 @@
+from Savory import Savory
+from Sweet import Sweet
+
 # Welcome class, includes username entry, hunger status input, change name option
-class Welcome:
+class Welcome():
     """Instantiate with username"""
 
     def __init__(self, username, hunger = True):
@@ -41,3 +44,18 @@ class Welcome:
         new_name = input("What would you like your new name to be? ")
         self.username = new_name
         print(f"User's name changed to: {self.username}")
+
+    
+    def savory_or_sweet(self):
+        """Pick which food category to switch to"""
+
+        selected_option = (input("Savory or sweet? ")).lower()
+
+        if selected_option == "savory":
+            user = Savory(self.username)
+            user.display_categories()
+        elif selected_option == "sweet":
+            user = Sweet(self.username)
+            user.display_recipes()
+        else:
+            print("invalid input")

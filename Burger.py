@@ -1,7 +1,5 @@
-from Savory import Savory
-
 # Inherits username from Savory class, provides methods for ordering a burger
-class Burger(Savory):
+class Burger():
     """Instantiate with username"""
 
     # Burger ingredient costs

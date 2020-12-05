@@ -155,9 +155,8 @@ class Sweet(Welcome):
             user.cake_picker()
             user.update_total()
 
+
 # Inherits username from Savory class, provides methods for ordering a burger
-
-
 class Burger(Savory):
     """Instantiate with username"""
 
@@ -231,6 +230,22 @@ class Burger(Savory):
         print(f"{self.username}'s total: ${round(self.total, 2)}")
         return round(self.total, 2)
 
+    def another_burger(self):
+        """Asks user if they want another burger. If yes, run burger_creator()"""
+
+        while True:
+            confirm_burger = (input("Do you want another burger?: ")).lower()
+
+            if confirm_burger == "yes" or confirm_burger == "y":
+                self.burger_creator()
+                break
+            elif confirm_burger == "no" or confirm_burger == "n":
+                print("Nothing ordered. Exiting")
+                exit()
+            else:
+                print("Invalid input. Try again.")
+                continue
+
     def burger_creator(self):
         """Create a burger graphic from user inputs"""
 
@@ -295,6 +310,10 @@ class Burger(Savory):
             print("\n Here's your burger!\n")
             for item in burger_ingredients:
                 print(item)
+
+        print("")
+        # Prompts user for another burger
+        self.another_burger()
 
 
 # Inherits username from Savory class, provides methods for ordering a pizza

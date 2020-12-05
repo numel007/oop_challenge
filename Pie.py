@@ -1,7 +1,5 @@
-from Sweet import Sweet
-
 # Inherits username from Sweet class, provide methods for ordering pie
-class Pie(Sweet):
+class Pie():
     """Instatiate with username"""
 
     # Pie Prices

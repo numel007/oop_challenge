@@ -1,10 +1,4 @@
 from Welcome import Welcome
-from Savory import Savory
-from Sweet import Sweet
-from Burger import Burger
-from Pizza import Pizza
-from Cake import Cake
-from Pie import Pie
 
 def create_user():
     username = input("Input your name: ")
@@ -22,6 +16,7 @@ def create_user():
             print("Invalid input. Try again.\n")
             continue
 
+    print("")
     global created_user
     created_user = Welcome(username, hunger_status)
 
@@ -48,6 +43,12 @@ def welcome_options(user):
             print("Invalid input. Try again.\n")
             continue
 
+def change_name():
+    """Change user's name"""
+
+    new_name = input("What would you like your new name to be? ")
+    print(f"User's name changed to: {new_name}")
+    return new_name
 # ------------ Test Object Creation ------------
 create_user()
-welcome_options(created_user)
+created_user.savory_or_sweet()

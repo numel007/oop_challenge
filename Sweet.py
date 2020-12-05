@@ -1,7 +1,9 @@
-from Welcome import Welcome
+from Pie import Pie
+from Cake import Cake
+# from main import change_name
 
 # Inherits username from Welcome class, provides method to display sweet recipe options
-class Sweet(Welcome):
+class Sweet():
     """Instantiate with username"""
 
     def __init__(self, username, hunger = True, chosen_item = ""):
@@ -44,3 +46,6 @@ class Sweet(Welcome):
                 continue
 
         return self.chosen_item
+
+test_object = Sweet("Test User")
+# test_object.change_name()

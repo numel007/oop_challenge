@@ -1,7 +1,5 @@
-from Sweet import Sweet
-
 # Inherits username from Sweet clas, provides methods for ordering cake
-class Cake(Sweet):
+class Cake():
     """Instantiates with username"""
 
     # Cake Prices
