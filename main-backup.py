@@ -1103,7 +1103,7 @@ def welcome_options(user):
             welcome_options(user)
             break
         elif selected_option == "4" or selected_option == "order food" or selected_option == "food":
-            created_user.savory_or_sweet()
+            user.savory_or_sweet()
             break
         elif selected_option == "5" or selected_option == "exit" or selected_option == "quit":
             print("Exiting program")
