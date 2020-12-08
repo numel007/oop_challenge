@@ -41,17 +41,21 @@ class Welcome:
 
     def savory_or_sweet(self):
         """Pick which food category to switch to"""
+        while True:
 
-        selected_option = (input("Savory or sweet? ")).lower()
+            selected_option = (input("\nSavory or sweet? ")).lower()
 
-        if selected_option == "savory":
-            user = Savory(self.username)
-            user.display_categories()
-        elif selected_option == "sweet":
-            user = Sweet(self.username)
-            user.display_recipes()
-        else:
-            print("invalid input")
+            if selected_option == "savory":
+                user = Savory(self.username)
+                user.display_categories()
+                break
+            elif selected_option == "sweet":
+                user = Sweet(self.username)
+                user.display_recipes()
+                break
+            else:
+                print("Invalid input")
+                continue
 
 
 # Inherits username from Welcome class, provides method to display savory recipe options
@@ -81,7 +85,7 @@ class Savory(Welcome):
 
         while True:
             recipe_name = input(
-                "What tickles your fancy today? A burger or pizza? ")
+                "\nWhat tickles your fancy today? A burger or pizza? ")
 
             if recipe_name.lower() == "burger" or recipe_name.lower() == "meat between buns" or recipe_name.lower() == "meat":
                 print("I see you want a burger.")
@@ -92,7 +96,7 @@ class Savory(Welcome):
                 self.chosen_item = "pizza"
                 break
             else:
-                print("I have no idea what that is my dude. Try again.")
+                print("Invalid input")
                 continue
 
         if self.chosen_item == "burger":
@@ -132,7 +136,7 @@ class Sweet(Welcome):
 
         while True:
             recipe_name = input(
-                "Got a sweet tooth eh? I've got pie and cake on the menu. What'll it be? ")
+                "\nGot a sweet tooth eh? I've got pie and cake on the menu. What'll it be? ")
 
             if recipe_name.lower() == "pie":
                 print("I see you want pie.")
@@ -150,8 +154,8 @@ class Sweet(Welcome):
             user = Pie(self.username)
             user.pie_picker()
             user.update_total()
-        elif self.chosen_item == "pizza":
-            user.Cake(self.username)
+        elif self.chosen_item == "cake":
+            user = Cake(self.username)
             user.cake_picker()
             user.update_total()
 
@@ -185,8 +189,9 @@ class Burger(Savory):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering a burger.")
 
+    # Updating of ingredient prices should not be possible outside of this class, set as private method
     @classmethod
-    def update_ingredients_costs(cls):
+    def __update_ingredients_costs(cls):
         """Update class ingredient prices"""
 
         # Store old prices for later usage
@@ -311,9 +316,6 @@ class Burger(Savory):
             for item in burger_ingredients:
                 print(item)
 
-        print("")
-        # Prompts user for another burger
-        self.another_burger()
 
 
 # Inherits username from Savory class, provides methods for ordering a pizza
@@ -343,6 +345,7 @@ class Pizza(Savory):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering pizza.")
 
+    # # Updating of pizza prices should not be possible outside of this class. Set as private.
     @classmethod
     def update_pizza_costs(cls):
         """Update class pizza prices"""
@@ -505,20 +508,20 @@ class Pizza(Savory):
             if pizza_size == "1" or pizza_size == "slice" or pizza_size == "a slice":
                 self.item_list.append("slice")
                 graphics.append(slice_graphic)
-                print("1 slice added to your card\n")
+                print("1 slice added to your cart\n")
                 continue
 
             elif pizza_size == "2" or pizza_size == "10" or pizza_size == "10in" or pizza_size == "10 in":
                 self.item_list.append("10in")
                 graphics.append(ten_in_graphic)
-                print("10inch pizza added to your card\n")
+                print("10inch pizza added to your cart\n")
                 continue
 
             elif pizza_size == "3" or pizza_size == "40" or pizza_size == "40in" or pizza_size == "40 in":
                 self.item_list.append("jeremiah special")
                 graphics.append(the_jeremiah_special_graphic)
                 print(
-                    "40inch pizza added to your card\n. Family size? More like personal sized.")
+                    "40inch pizza added to your cart. Family size? More like personal sized. \n")
                 continue
             elif pizza_size == "4":
                 print("No pizza ordered")
@@ -568,8 +571,9 @@ class Pie(Sweet):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering pie.")
 
+    # Pie prices should not be updated outside of the class. Set as private.
     @classmethod
-    def update_pie_prices(cls):
+    def __update_pie_prices(cls):
         """Update pie prices"""
 
         # Store old prices for later usage
@@ -753,20 +757,20 @@ class Pie(Sweet):
             if pie_choice == "1" or pie_choice == "pumpkin" or pie_choice == "pumpkin pie" or pie_choice == "pumpkin pie slice":
                 self.item_list.append("pumpkin slice")
                 graphics_list.append(pumpkin_pie_graphic)
-                print("1 slice of pumpkin pie added to your card\n")
+                print("1 slice of pumpkin pie added to your cart\n")
                 continue
 
             elif pie_choice == "2" or pie_choice == "cherry" or pie_choice == "cherry pie" or pie_choice == "cherry pie slice":
                 self.item_list.append("cherry slice")
                 graphics_list.append(cherry_pie_graphic)
-                print("1 slice of cherry pie added to your card\n")
+                print("1 slice of cherry pie added to your cart\n")
                 continue
 
             elif pie_choice == "3" or pie_choice == "apple" or pie_choice == "apple pie" or pie_choice == "whole apple pie":
                 self.item_list.append("whole apple pie")
                 graphics_list.append(whole_apple_pie_graphic)
                 print(
-                    "1 whole apple pie added to your card\n. Still cheaper than seeing a therapist amirite?")
+                    "1 whole apple pie added to your cart\n. Still cheaper than seeing a therapist amirite?")
                 continue
 
             elif pie_choice == "4" or pie_choice == "no pie":
@@ -791,7 +795,7 @@ class Pie(Sweet):
             print(graphic)
 
 
-# Inherits username from Sweet clas, provides methods for ordering cake
+# Inherits username from Sweet class, provides methods for ordering cake
 class Cake(Sweet):
     """Instantiates with username"""
 
@@ -818,8 +822,9 @@ class Cake(Sweet):
         print(f"Username: {self.username}")
         print(f"{self.username} is ordering cake.")
 
+    # Cake prices should not be updated outside of class. Set as private.
     @classmethod
-    def update_cake_prices(cls):
+    def __update_cake_prices(cls):
         """Update cake prices"""
 
         # Store old prices for later usage
@@ -1001,19 +1006,19 @@ class Cake(Sweet):
             if cake_choice == "1" or cake_choice == "white cake" or cake_choice == "white":
                 self.item_list.append("white cake")
                 graphics_list.append(white_cake_graphic)
-                print("1 slice of white cake added to your card\n")
+                print("1 slice of white cake added to your cart\n")
                 continue
 
             elif cake_choice == "2" or cake_choice == "crepe cake" or cake_choice == "crepe":
                 self.item_list.append("crepe cake")
                 graphics_list.append(crepe_cake_graphic)
-                print("1 slice of crêpe cake added to your card\n")
+                print("1 slice of crêpe cake added to your cart\n")
                 continue
 
             elif cake_choice == "3" or cake_choice == "birthday cake" or cake_choice == "birthday":
                 self.item_list.append("birthday cake")
                 graphics_list.append(birthday_cake_graphic)
-                print("1 whole birthday cake added to your card\n")
+                print("1 whole birthday cake added to your cart\n")
 
             elif cake_choice == "4" or cake_choice == "no cake":
                 print("No selection. Order completed.")
@@ -1076,7 +1081,7 @@ def welcome_options(user):
     while True:
 
         selected_option = (input(
-            "Select an option\n 1. Change name\n 2. Change hunger status\n 3. View user info\n 4. Order Food\n 5. Quit\n Your choice: ")).lower()
+            "\nSelect an option\n 1. Change name\n 2. Change hunger status\n 3. View user info\n 4. Order Food\n 5. Quit\n Your choice: ")).lower()
 
         if selected_option == "1" or selected_option == "change name" or selected_option == "name":
             user.change_name()
@@ -1114,7 +1119,6 @@ def change_name(user):
     user.username = input("What would you like your new name to be? ")
     print(f"User's name changed to: {user.username}")
     welcome_options(user)
-
 
 # ------------------- Function Call -------------------
 create_user()
